@@ -11,7 +11,6 @@ The full benchmark is JDOMAIN=all: 19 FLC-Rural scenes + forest 101, 102, 103 an
 import os, sys, csv, collections
 B = os.environ.get("BASE_ROOT", "/path/to/base"); J = os.environ.get("JROOT", f"{B}/work")
 FLC = os.environ.get("FLC_ROOT", "/path/to/FLC-Rural"); IRD = os.environ.get("IRD_ROOT", "/path/to/ir_dataset")
-sys.path.insert(0, os.environ.get("EVAL_CODE", f"{B}/eval"))      # folder with cr_eval.py
 BASELINE = f"{B}/weights/baseline_best.pt"; COCO_N = f"{B}/yolov8n.pt"
 SPLITS = ("pool", "gap", "val", "test")
 EXCLUDE = {4}

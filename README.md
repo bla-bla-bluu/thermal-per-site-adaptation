@@ -4,6 +4,7 @@ Scripts for adapting a thermal person detector to a new site from unlabelled foo
 
 ## Layout
 - `code/jcommon.py`: shared paths, scene list and the temporal split (pool 50%, gap 10%, val 10%, test 30%).
+- `code/cr_eval.py`: detection generators (Ultralytics validator, sliced inference), the matcher, 101-point AP, P/R/F1 and frame bootstrap used by every script.
 - `code/build_flc_splits.py`, `forest_build.py`, `forest_build_view4.py`: per-recording split folders and YOLO data files.
 - `code/teacher_and_baseline.py`, `batch3_pseudolabels.py`, `train_flc.py`, `eval_flc.py`: sliced-inference teacher, pseudo-labels, students, evaluation.
 - `code/b6_*`, `b7_*`, `b9_*`: students with every epoch saved, per-epoch prediction caches and policy evaluation.
@@ -13,14 +14,13 @@ Scripts for adapting a thermal person detector to a new site from unlabelled foo
 - `code/b7_setup.sh`: YOLO26n source model and the RT-SFOD environment.
 
 ## Setup
-- Python with Ultralytics 8.4, SAHI 0.12 and NumPy; detectron2 0.6 for the SF-UT scripts.
+- Python with Ultralytics 8.4, SAHI 0.12 and NumPy 2; detectron2 0.6 for the SF-UT scripts.
 - Locations are read from environment variables:
 
 | Variable | Meaning |
 |---|---|
 | `BASE_ROOT` | base folder with source weights (`weights/baseline_best.pt`, `yolov8n.pt`) |
 | `JROOT` | working folder for data splits, caches, runs and results (default `$BASE_ROOT/work`) |
-| `EVAL_CODE` | folder with the matcher and sliced-inference module `cr_eval.py` |
 | `FLC_ROOT`, `IRD_ROOT` | FLC-Rural release and its YOLO-format frames and labels |
 | `LLVIP_IMAGES`, `LLVIP_YAML` | LLVIP training images and data file (source models of SF-YOLO, SF-UT, YOLO26n) |
 | `PYS`, `PYU` | Python of the SF-YOLO and SF-UT environments |
@@ -39,4 +39,4 @@ Each script lists its steps and arguments in its docstring.
 Not included. Public sets (CAMEL, BIRDSAI, MOTChallenge, Cityscapes) come from their authors under their licences; the rural recordings are on Zenodo, https://doi.org/10.5281/zenodo.22744783.
 
 ## Licence
-Not set yet.
+MIT, see `LICENSE`. The scripts call Ultralytics (AGPL-3.0), SAHI (MIT) and detectron2 (Apache-2.0), and the SF-YOLO, SF-UT and RT-SFOD scripts clone those methods' official repositories at run time; all of them keep their own licences and none is included here.
